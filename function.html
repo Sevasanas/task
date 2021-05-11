@@ -8,6 +8,14 @@
 </head>
 <body>
     <script>
+        var arg1 = +prompt("Введите первое число");
+        var arg2 = +prompt("Введите второе число");
+        var task = prompt("Какое вычисление хотите сделать (+, -, *, /)");
+        var summary = sum(arg1,arg2);
+        var subtraction = sub(arg1,arg2);
+        var multiply = mult(arg1,arg2);
+        var divide = div(arg1,arg2);
+        
         function sum(a,b) {
 		return a + b;
 	    }
@@ -20,6 +28,43 @@
         function div(a,b) {
             return a / b;
         }
+
+        function mathOperation(arg1,arg2,operation) {
+            switch (operation) {
+                case "+":
+                    return sum(arg1,arg2);
+                break;
+                case "-":
+                    return sub(arg1,arg2);
+                break;
+                case "*":
+                    return mult(arg1,arg2);
+                break;
+                case "/":
+                    return div(arg1,arg2);
+                default:
+                    alert("Неверная операция")
+                break;
+            }
+        }
+
+        switch(task) {
+            case "+" :
+                alert(summary);
+            break;
+            case "-" :
+                alert(subtraction);
+            break;
+            case "*" :
+                alert(multiply);
+            break;
+            case "/" :
+                alert(divide);
+            break;
+            default :
+                alert("Неверная операция");
+            break;
+	}
     </script>
 </body>
 </html>
