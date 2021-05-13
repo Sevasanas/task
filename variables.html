@@ -8,14 +8,15 @@
 </head>
 <body>
     <script>
-        var a = +prompt("Введите любое число");
-        var b = +prompt("Введите любое число");
+        var a = parseInt(prompt("Введите первое число"));
+        var b = parseInt(prompt("Введите второе число"));
         if (a >= 0 && b >= 0) {
             x = a - b;
         } else if (a < 0 && b < 0) {
             x = a * b;
-        } else if (a >= 0 || a < 0 && b >= 0 || b < 0) {
+        } else {
             x = a + b;
+            
         }
 
         alert(x);
