@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function CutNum(a) {
+        if (a >= 0 && a < 1000) {
+            this.one = console.log("Единицы: "+ parseInt(a % 10));
+            this.ten = console.log("Десятки: "+ parseInt(a / 10 % 10));
+            this.hundred = console.log("Сотни: "+ parseInt(a / 100));
+        } else {
+            console.log("Вы ввели некорректное значение");
+        }
+    }
+
+    var num = new CutNum(prompt("Введите число от 0 до 999"));
+    console.log(num);
+    </script>
+    
+</body>
+</html>
