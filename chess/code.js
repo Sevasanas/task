@@ -36,9 +36,36 @@ document.querySelector('.table_container').appendChild(table);
 
 var tdlist = document.querySelectorAll('td'); 
 
+for (i = 48; i < tdlist.length; i++) {
+    tdlist[i].style.color = 'black';
+    
+}
 
+var tdArr = Array.from(tdlist);
+var result = tdArr.filter(function (elem) {
+    switch (tdArr.indexOf(elem)) {
+        case 0: case 7: case 56: case 63:
+			elem.innerHTML = chessFigures.castle;
+			break;
+		case 1: case 6: case 57: case 62:
+			elem.innerHTML = chessFigures.knight;
+			break;
+		case 2: case 5: case 58: case 61:
+			elem.innerHTML = chessFigures.bishop;
+			break;
+		case 4: case 60:
+			elem.innerHTML = chessFigures.queen;
+			break;
+		case 3: case 59:
+			elem.innerHTML = chessFigures.king;
+			break;
+    }
+    if (tdArr.indexOf(elem) > 7 && tdArr.indexOf(elem) < 16 || tdArr.indexOf(elem) > 47 && tdArr.indexOf(elem) < 56) {
+        elem.innerHTML = chessFigures.paw;
+    }
+})
 var trlist = document.querySelectorAll('tr');
-// циклы для создания цифр
+
 for (var i = 0, j = 8; i < trlist.length; i++, j--) {
 	trlist[i].insertAdjacentHTML('afterBegin', '<td style="color: black">' + j + '</td>');
 }
