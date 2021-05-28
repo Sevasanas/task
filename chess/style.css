@@ -1,0 +1,28 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f3dec3;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+table {
+    border-spacing: 0px;
+}
+
+td {
+    font-size: 4em;
+    text-align: center;
+    width: 90px;
+    height: 90px;
+    color: #fff;
+}
+
+#begintr td,
+#endtr td {
+    color: #000;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+}
