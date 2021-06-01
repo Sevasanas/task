@@ -1,0 +1,13 @@
+.small {
+    display: flex;
+    justify-content: space-between;
+}
+
+.big {
+    display: flex;
+    justify-content: space-between;
+}
+
+img {
+    display: inline-block;
+}
