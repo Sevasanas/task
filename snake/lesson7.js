@@ -76,6 +76,18 @@ function startGame() {
     setTimeout(createFood, 5000);
 }
 
+function startGame() {
+    if (!gameIsRunning) {
+        gameIsRunning = true;
+        
+        createFood();
+        respawn();
+        snake_timer = setInterval(move, SNAKE_SPEED);
+        food_timer = setInterval(createFood, FOOD_SPEED);
+        problem_timer = setInterval(createProblem, PROBLEM_SPEED);
+    }
+}
+
 /**
  * Функция расположения змейки на игровом поле
  */
@@ -125,12 +137,28 @@ function move() {
     else if (direction == 'y-') {
         new_unit = document.getElementsByClassName('cell-' + (coord_y + 1) + '-' + (coord_x))[0];
     }
+    if (new_unit === undefined) {
+        new_unit = headTeleport(coord_y, coord_x);
+    }
+
+    if (!haveFood(new_unit)) {
+        var removed = snake.splice(0, 1)[0];
+        var classes = removed.getAttribute('class').split(' ');
+        removed.setAttribute('class' , classes[0] + ' ' + classes[1]);
+    }
+        else {
+            if (SNAKE_SPEED > 50) {
+                SNAKE_SPEED -= 20;
+                clearInterval(snake_timer);
+                snake_timer = setInterval(move, SNAKE_SPEED);
+            }
+        }
 
     // Проверки
     // 1) new_unit не часть змейки
     // 2) Змейка не ушла за границу поля
     //console.log(new_unit);
-    if (!isSnakeUnit(new_unit) && new_unit !== undefined) {
+    if (!isSnakeUnit(new_unit) && pathClear(new_unit)) {
         // Добавление новой части змейки
         new_unit.setAttribute('class', new_unit.getAttribute('class') + ' snake-unit');
         snake.push(new_unit);
@@ -148,6 +176,16 @@ function move() {
     else {
         finishTheGame();
     }
+}
+
+function pathClear(unit) {
+    var check = false;
+
+    var unit_classes = unit.getAttribute('class').split(' ');
+    if (!unit_classes.includes('problem-unit')) {
+        check = true;
+    }
+    return check;
 }
 
 /**
@@ -220,6 +258,22 @@ function createFood() {
 
             food_cell.setAttribute('class', classes + 'food-unit');
             foodCreated = true;
+        }
+    }
+}
+
+function createProblem() {
+    var problemCreated = false;
+    while (!problemCreated) {
+        var problem_x = Math.floor(Math.random() * FIELD_SIZE_X);
+        var problem_y = Math.floor(Math.random() * FIELD_SIZE_Y);
+        var problem_cell = document.getElementsByClassName('cell-' + problem_y + '-' + problem_x)[0];
+        var problem_cell_classes = problem_cell.getAttribute('class').split(' ');
+
+        if (!problem_cell_classes.includes('snake-unit') && !problem_cell_classes.includes('food-unit')) {
+            var classes = '';
+            problem_cell.classList.add('problem-unit');
+            problemCreated = true;
         }
     }
 }
